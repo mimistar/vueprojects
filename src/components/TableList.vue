@@ -2,10 +2,10 @@
 <div class="table-box">
     <div class="title"><h5>{{this.$route.params.title}}</h5></div>
     <div class="choosebox">
-      <button class="alldele">删除</button>
+      <button class="alldele" v-on:click="allRemove">删除</button>
       <label>
-        <div class="search"><input  type="text" placeholder="请输入关键词"/></div>
-        <button class="searchBtn">搜索</button>
+        <div class="search"><input  v-model="searchInfo" type="text" placeholder="请输入关键词"/></div>
+        <button class="searchBtn"v-on:click="searchFun">搜索</button>
       </label>
     </div>
     <div class="tablebox-rowcolumn">
@@ -19,12 +19,29 @@
       <div class="automore row-one"><span>操作</span></div>
     </div>
       <div class="row-box" v-for="(acticle,i) in acticelArray">
-        <ChooseCheck v-on:deleData="deleDatafun($event)" v-on:addData="addDatafun($event)" :row="i" :chooseArray="chooseArray"  :acticelArray="acticelArray" :acticle="acticle" ></ChooseCheck>
+        <ChooseCheck v-on:unchooseData="unchooseDatafun($event)" v-on:chooseData="chooseDatafun($event)" :row="i" :chooseArray="chooseArray"  :acticelArray="acticelArray" :acticle="acticle" ></ChooseCheck>
         <div class="time row-one"><span>{{acticle.date}}</span></div>
         <div class="auther row-one"><span>{{acticle.auther}}</span></div>
         <div class="actilceTitle row-one"><span>{{acticle.title}}</span></div>
-        <div class="automore row-one"><span>操作</span></div>
+        <div class="automore row-one">
+          <button class="oneEdit"  v-on:click="editRemove(acticle.id)">编辑</button>
+          <button class="onedele"  v-on:click="oneRemove(acticle.id)">删除</button>
+        </div>
       </div>
+      <div class="pageList">
+        <ul>
+          <li v-on:click="changePage('frist')"><span>首页</span></li>
+          <li v-for="(page,i) in pagelistData" :class="{'active':pageindex==i}" v-on:click="changePage(i)" ><span>{{page}}</span></li>
+          <li v-on:click="changePage('last')"><span>末页</span></li>
+          <li v-on:click="changePage('up')"><span>上一页</span></li>
+          <li  v-on:click="changePage('down')"><span>下一页</span></li>
+        </ul>
+      </div>
+    </div>
+    <div v-if="alertState" class="alertmodel">
+      <p v-if="alertType=='dele'">你删除了第{{this.alertInfo}}行</p>
+      <p v-else-if="alertType=='nodata'">请先选择你要删除的数据</p>
+      <p v-else-if="alertType=='edit'">你要编辑第{{this.alertInfo}}行</p>
     </div>
 </div>
 </template>
@@ -46,10 +63,20 @@ components:{
         {id:6,date:'2018-2-6',auther:'star6',title:'6文章标题文章标题文章标题文章标题文章标题'},
         {id:7,date:'2018-2-7',auther:'star7',title:'7文章标题文章标题文章标题文章标题文章标题'},
       ],
+      pagelistData:[1,2,3,4,5,6,7],
       chooseArray:[],
+      alertState:false,
+      alertInfo:'',
+      alertType:'dele',
+      pageindex:0,
+      searchInfo:'',
     }
   },
   methods:{
+    searchFun(){
+      console.log(this.searchInfo)
+    },
+    /** 全选**/
     chooseall(){
         var arraylins=[]
       if(!this.showcheckall){
@@ -66,18 +93,147 @@ components:{
       }
       this.showcheckall=!this.showcheckall
     },
-    addDatafun(){
+    chooseDatafun(){
       if(this.chooseArray.length==this.acticelArray.length){
         this.showcheckall=true
       }
     },
-    deleDatafun(){
+    noDoubleClick(){
+      return this.alertState
+    },
+    unchooseDatafun(){
       this.showcheckall=false
+    },
+    setTimeFun(){
+      setTimeout(()=>{
+        this.alertState=false
+        this.alertInfo=""
+      },1000)
+    },
+    deleteCommon(){
+      this.alertInfo=this.chooseArray.join(',')
+      this.acticelArray= this.acticelArray.filter((items)=>{
+        this.$set(items,'ischeck',false)
+        return  this.chooseArray.indexOf(items.id)==-1
+      })
+      this.chooseArray=[]
+      this.showcheckall=false
+      this.alertState=true
+      this.setTimeFun()
+    },
+    oneRemove(id){
+      if(this.noDoubleClick()){
+        retrun;
+      }
+      this.chooseArray=[]
+      this.chooseArray.push(id)
+      this.deleteCommon()
+    },
+    editRemove(id){
+        if(this.noDoubleClick()){
+          retrun;
+        }
+        this.alertType='edit'
+        this.alertInfo=id
+        this.alertState=true
+        this.setTimeFun()
+    },
+    allRemove(){
+      let acticeSize=this.acticelArray.length
+      let chooseSize=this.chooseArray.length
+      this.alertType='dele'
+      if(chooseSize==0){
+        this.alertState=true
+        this.alertType='nodata'
+          this.setTimeFun()
+          return;
+      }
+      this.deleteCommon()
+    },
+    changePage(i){
+      if(i=='frist'){
+        this.pageindex=0
+      }else if(i=='last'){
+        this.pageindex=this.pagelistData.length-1
+      }else if(i=='up'){
+        this.pageindex!==0?this.pageindex--:this.pageindex=this.pageindex;
+      }else if(i=='down'){
+        this.pageindex!==this.pagelistData.length-1?this.pageindex++:this.pageindex=this.pageindex
+      }else{
+        this.pageindex=i
+      }
     }
   }
 }
 </script>
 <style scoped>
+.pageList{
+  display:flex;
+  display:-webkit-flex;
+  margin-top:10px;
+  }
+  .pageList ul{
+    list-style:none;
+    padding:0;
+    margin:0 auto;
+  }
+  .pageList ul li{
+    float:left;
+    padding:5px 10px;
+    border:1px solid #c7c7cc;
+    border-radius:4px;
+    margin:5px;
+    cursor:pointer;
+  }
+  .pageList ul li.active{
+    background-color:#4DB3FF;
+  }
+  .pageList ul li.active span{
+    color:#fff
+  }
+  .pageList ul li span{
+    color:#2b2b2b;
+    cursor:pointer
+  }
+.oneEdit{
+  background-color:#4DB3FF;
+  padding:5px 10px;
+  border:none;
+  outline:none;
+  border-radius:4px;
+  color:#fff;
+  cursor:pointer;
+}
+.onedele{
+  padding:5px 10px;
+  border:none;
+  outline:none;
+  border-radius:4px;
+  background-color:#e62129;
+  color:#fff;
+  cursor:pointer;
+}
+.alertmodel{
+    width:250px;
+    min-height:80px;
+    position:absolute;
+    left:50%;
+    top:50px;
+    margin-top:-40px;
+    margin-left:-125px;
+    background-color:#000;
+    opacity:0.8;
+    border-radius:5px;
+    display:flex;
+    display:-webkit-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 0px 15px;
+}
+.alertmodel p{
+  color:#fff;
+  margin:0px;
+}
 .ischeck{
   background-color:#4db3ff;
   border:1px solid #fff !important;
@@ -169,6 +325,7 @@ components:{
     border-radius:4px;
     background-color:#4db3ff;
     color:#fff;
+    cursor:pointer;
 }
 .search{
   display:inline-block;
@@ -191,6 +348,7 @@ components:{
   border-radius:4px;
   background-color:#e62129;
   color:#fff;
+  cursor:pointer;
 }
 .choosebox label{
   display:inline-block

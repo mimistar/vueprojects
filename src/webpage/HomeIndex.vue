@@ -181,6 +181,7 @@ export default {
   .center-centent-left{
     flex:1;
     -webkit-flex:1;
+    overflow:scroll;
   }
   .navlist-left-l dl{
     margin:10px 15px 0px 10px;
