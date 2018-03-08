@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import IndexPage from '@/components/IndexPage'
-import TestPage from '@/components/TestPage'
+import VuetableList from '@/components/VuetableList'
 import Myself from '@/components/Myself'
 import Chlidrenpage from '@/components/Chlidrenpage'
 import TableList from '@/components/TableList'
@@ -24,8 +24,9 @@ export default new Router({
       name: 'TableList',
       component: TableList,
     },{
-      path:'/TestPage',
-      component:TestPage,
+      path:'/VuetableList',
+      name: 'VuetableList',
+      component:VuetableList,
       children:[
       {
         path: 'Chlidrenpage',

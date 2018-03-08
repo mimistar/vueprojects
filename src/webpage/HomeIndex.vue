@@ -50,14 +50,11 @@ export default {
             title:'table',
             url:'',
             child:[
-              {title:'知识点',url:''},
-              {title:'文章列表',url:'TableList'}
+              {title:'文章列表',url:'TableList'},
+              {title:'编辑编辑',url:'VuetableList'}
             ]
         },
-        {
-            title:'采集',
-            url:'',
-        },
+
         {
             title:'会员',
             url:'',

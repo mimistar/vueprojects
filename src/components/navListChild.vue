@@ -1,7 +1,7 @@
 <template>
 <div class="navList-child">
     <dt v-on:click="showOrfade">
-      <img class="navIcon" src="../assets/logo.png">
+      <!--img class="navIcon" src="../assets/logo.png"-->
       <p class="navTitle">
         <router-link v-if="morenav.url" :to="{name:morenav.url,params:{title:morenav.title}}">{{morenav.title}}</router-link>
         <!--router-link :to="{path:morenav.url}">{{morenav.title}}</router-link-->

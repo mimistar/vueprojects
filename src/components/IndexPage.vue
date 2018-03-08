@@ -89,9 +89,9 @@ export default{
     }
   }
 },
-  components:{
-     sChart
-   }
+components:{
+   sChart
+ }
 }
 </script>
 <style scoped>
