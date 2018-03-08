@@ -4,7 +4,7 @@
     <div class="title"><h5>{{this.$route.params.title}}</h5></div>
     <div class="titleInfo"><h3>摘要</h3></div>
     <div class="content-center-box">
-      基于vue2.0在vue-cli的基础上搭建的一个简易后台管理系统，ui没有用到框架手写的,有需要的也可以怎么用Element UI套上.
+      基于vue2.0在vue-cli的基础上搭建的一个简易后台管理系统，ui没有用到框架手写的,有需要的也可以用Element UI套上.
     </div>
     <div class="titleInfo"><h3>涉及知识点</h3></div>
     <div class="content-center-box">
