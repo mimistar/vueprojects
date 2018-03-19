@@ -1,6 +1,6 @@
 <template>
   <div  class="infoDataBox-IndexPage">
-    <h5 class="wcInfo">欢迎使用专业的php网站管理系统,轻松建站首选利器--织梦内容管理系统</h5>
+    <h5 class="wcInfo">欢迎使用网站后台管理系统</h5>
     <div class="infoData-IndexPage">
       <div class="infoDataLeft-IndexPage">
           <div class="titleInfo-IndexPage">
@@ -33,6 +33,40 @@
             >
             </sChart>
           </div>
+      </div>
+    </div>
+    <div class="infoData-IndexPage">
+      <div class="infoDataLeft-IndexPage">
+        <div class="titleInfo-IndexPage">
+          <h5>折线图</h5>
+        </div>
+        <div class="chartsbox-IndexPage">
+          <sChart
+            :canvasId=sChartline.canvasId
+            :type=sChartline.type
+            :width=sChartline.width
+            :height=sChartline.height
+            :data=sChartline.data
+            :options=sChartline.options
+          >
+          </sChart>
+        </div>
+      </div>
+      <div class="infoDataRight-IndexPage">
+        <div class="titleInfo-IndexPage">
+          <h5>环形图</h5>
+        </div>
+        <div class="chartsbox-IndexPage">
+          <sChart
+            :canvasId=sChartring.canvasId
+            :type=sChartring.type
+            :width=sChartring.width
+            :height=sChartring.height
+            :data=sChartring.data
+            :options=sChartring.options
+          >
+          </sChart>
+        </div>
       </div>
     </div>
   </div>
@@ -86,6 +120,57 @@ export default{
           colorList: ['#1E9FFF', '#13CE66', '#F7BA2A', '#FF4949', '#72f6ff'],    // 饼图颜色列表
           radius: 100,
       },
+    },
+    sChartline:{
+      canvasId: 'myCanvasline',
+      type:'折线数据',
+      width: 500,
+      height: 400,
+      data: [
+        {name:'2012', value:10},
+        {name:'2013', value:1499},
+        {name:'2014', value:2260},
+        {name:'2015', value:1170},
+        {name:'2016', value:970},
+        {name:'2017', value:1450}
+      ],
+      options:{
+        title: '某商店近年营业总额',
+        padding: 50,
+        yEqual: 5,
+        bgColor: '#ffffff',
+        fillColor: '#FF4949',
+        axisColor: '#666666',
+        contentColor: '#e4e4e4',
+        titleColor: '#000000',
+        titlePosition: 'top'
+      }
+    },
+    sChartring:{
+      canvasId: 'myCanvasring',
+      type:'ring',
+      width: 500,
+      height: 400,
+      data: [
+        {name:'2012', value:1000},
+        {name:'2013', value:1499},
+        {name:'2014', value:2260},
+        {name:'2015', value:1170},
+        {name:'2016', value:970},
+        {name:'2017', value:1450}
+      ],
+      options:{
+        title: '环状数据',
+        padding: 50,
+        yEqual: 5,
+        bgColor: '#ffffff',
+        fillColor: '#FF4949',
+        axisColor: '#666666',
+        contentColor: '#e4e4e4',
+        colorList: ['#e62129', '#8e8e93', '#F7BA2A', '#FF4949', '#72f6ff'],
+        titleColor: '#000000',
+        titlePosition: 'top'
+      }
     }
   }
 },
@@ -102,6 +187,8 @@ h5.wcInfo{margin:0 10px;padding:10px 10px;border-bottom:1px solid #c7c7cc}
 .infoData-IndexPage{
   display:flex;
   display:-webkit-flex;
+  padding-bottom: 50px;
+  margin-bottom:50px;
 }
 .infoDataLeft-IndexPage,.infoDataRight-IndexPage{
   flex:1;-webkit-flex:1;
