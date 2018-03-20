@@ -39,7 +39,7 @@ export default {
     return {
       morenavArray:[
         {
-            title:'作者有话说',
+            title:'简述',
             url:'Myself',
         },
         {
