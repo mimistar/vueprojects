@@ -11,7 +11,12 @@
     <div class="tablebox-rowcolumn">
     <div class="row-box row-bg">
       <div class="ckeck row-one">
-        <label class="replacecheck" :class="{'ischeck':showcheckall}" for="allcheckbox" v-on:click="chooseall"></label>
+        <label class="replacecheck"
+               :class="{'ischeck':showcheckall}"
+               for="allcheckbox"
+               v-on:click="chooseall">
+
+        </label>
       </div>
       <div class="time row-one"><span>日期</span></div>
       <div class="auther row-one"><span>作者</span></div>
@@ -19,7 +24,13 @@
       <div class="automore row-one"><span>操作</span></div>
     </div>
       <div class="row-box" v-for="(acticle,i) in acticelArray">
-        <ChooseCheck v-on:unchooseData="unchooseDatafun($event)" v-on:chooseData="chooseDatafun($event)" :row="i" :chooseArray="chooseArray"  :acticelArray="acticelArray" :acticle="acticle" ></ChooseCheck>
+        <ChooseCheck
+          v-on:deleData="unchooseDatafun($event)"
+          v-on:addData="chooseDatafun($event)"
+          :row="i" :chooseArray="chooseArray"
+          :acticelArray="acticelArray"
+          :acticle="acticle" >
+        </ChooseCheck>
         <div class="time row-one"><span>{{acticle.date}}</span></div>
         <div class="auther row-one"><span>{{acticle.auther}}</span></div>
         <div class="actilceTitle row-one"><span>{{acticle.title}}</span></div>
@@ -31,7 +42,9 @@
       <div class="pageList">
         <ul>
           <li v-on:click="changePage('frist')"><span>首页</span></li>
-          <li v-for="(page,i) in pagelistData" :class="{'active':pageindex==i}" v-on:click="changePage(i)" ><span>{{page}}</span></li>
+          <li v-for="(page,i) in pagelistData"
+              :class="{'active':pageindex==i}"
+              v-on:click="changePage(i)" ><span>{{page}}</span></li>
           <li v-on:click="changePage('last')"><span>末页</span></li>
           <li v-on:click="changePage('up')"><span>上一页</span></li>
           <li  v-on:click="changePage('down')"><span>下一页</span></li>
@@ -48,9 +61,14 @@
 <script>
 import ChooseCheck from '../components/ChooseCheck'
 export default{
-components:{
-  'ChooseCheck':ChooseCheck
-},
+  components:{
+    'ChooseCheck':ChooseCheck
+  },
+  props:{
+    indexC:{
+      type:Number
+    }
+  },
   data(){
   return{
       showcheckall:false,
@@ -72,9 +90,13 @@ components:{
       searchInfo:'',
     }
   },
+  beforeMount:function(){
+  },
+  created:function(){
+      // this.$emit("setChild",)
+  },
   methods:{
     searchFun(){
-      console.log(this.searchInfo)
     },
     /** 全选**/
     chooseall(){
@@ -123,7 +145,7 @@ components:{
     },
     oneRemove(id){
       if(this.noDoubleClick()){
-        retrun;
+        return;
       }
       this.chooseArray=[]
       this.chooseArray.push(id)
@@ -131,7 +153,7 @@ components:{
     },
     editRemove(id){
         if(this.noDoubleClick()){
-          retrun;
+          return;
         }
         this.alertType='edit'
         this.alertInfo=id

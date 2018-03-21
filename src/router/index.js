@@ -13,8 +13,8 @@ export default new Router({
       path: '/',
       name: 'IndexPage',
       component: IndexPage,
-
-    },{
+    },
+    {
       path: '/Myself',
       name: 'Myself',
       component: Myself,
@@ -23,7 +23,8 @@ export default new Router({
       path: '/TableList',
       name: 'TableList',
       component: TableList,
-    },{
+    },
+    {
       path:'/VuetableList',
       name: 'VuetableList',
       component:VuetableList,

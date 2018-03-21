@@ -18,7 +18,17 @@
       <div class="navlist-left">
         <div class="navlist-left-r">
         <dl>
-          <NavChild  v-for="morenav in morenavArray" v-bind:morenav="morenav" v-bind:key="morenav" test="hello,word"></NavChild>
+          <NavChild
+            v-for="(morenav,i) in morenavArray"
+            :morenav="morenav"
+            :key="i"
+            test="hello,word"
+            :indexParent="i"
+            :eqindex="eqindex"
+            @setIndex="setEqindex($event)"
+          >
+
+          </NavChild>
         </dl>
         </div>
       </div>
@@ -69,6 +79,12 @@ export default {
         },
         ],
       show:false,
+      eqindex:1,
+    }
+  },
+  methods:{
+    setEqindex(e){
+      this.eqindex=e
     }
   }
 }

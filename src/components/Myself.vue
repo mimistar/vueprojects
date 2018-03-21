@@ -8,7 +8,7 @@
     </div>
     <div class="titleInfo"><h3>涉及知识点</h3></div>
     <div class="content-center-box">
-      这个系统内容功能不多但是涉及到的内容几乎涵盖vue的全部知识点.<br/>
+      这个系统内容功能不多但是涉及到的内容涵盖vue的以下知识点.<br/>
       1、vue语法的考察<br/>
       2、动画的使用的<br/>
       3、路由的使用及路由传参,别名设置等<br/>

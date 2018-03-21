@@ -143,7 +143,7 @@ export default{
     position: absolute;
     transform:rotate(45deg) scaleY(1);
     -ms-transform:rotate(45deg) scaleY(1);
-    -s-transform:rotate(45deg) scaleY(1);
+    -o-transform:rotate(45deg) scaleY(1);
     -webkit-transform:rotate(45deg) scaleY(1);
     transform-origin: center;
   }
@@ -322,13 +322,14 @@ export default{
   left: 200px;
   top:14px;
   transition: all 0.5s ease;
+  transform:rotate(0deg);
 }
 .daosanjiao{
   transform:rotate(180deg);
   -webkit-transform:rotate(180deg);
   transition:all 0.5s;
   -webkit-transition:all 0.5s;
-  top:8px;
+  top:5px;
   left: 200px;
 }
 .acticlAuther{
