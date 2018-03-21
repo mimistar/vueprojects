@@ -8,9 +8,10 @@
        <div class="header-center-vue">
          <p class="info-right-vue">您好啊!</p>
        </div>
-       <div class="userimgBox">
+       <div class="userimgBox" @click="outLoginshow">
         <img class="userimg"  src="../assets/logo.png"/>
-        oneGod
+        {{username}}
+         <div class="outLogin" @click="outLogin" v-if="outstats">退出</div>
        </div>
       </div>
    </div>
@@ -44,6 +45,11 @@ import NavChild from '../components/navListChild'
 export default {
   components:{
     'NavChild':NavChild
+  },
+  props:{
+    username:{
+      type:String
+    }
   },
   data () {
     return {
@@ -80,16 +86,43 @@ export default {
         ],
       show:false,
       eqindex:1,
+      outstats:false,
     }
+  },
+  created:function () {
+
   },
   methods:{
     setEqindex(e){
       this.eqindex=e
+    },
+    outLoginshow(){
+      this.outstats=true
+    },
+    outLogin(){
+      window.localStorage.removeItem('loginName')
+      window.localStorage.removeItem('userPassword')
+      this.$emit('login',true)
     }
   }
 }
 </script>
 <style scoped>
+  .outLogin{
+    position: absolute;
+    width:50px;
+    height:25px;
+    padding:5px 0;
+    color:#fff;
+    right:-10px;
+    top:60px;
+    line-height: 25px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #c7c7c7;
+    cursor: pointer;
+    z-index: 5;
+  }
   .centent-box{
     margin:0px auto;
     height:100%;width:100%
@@ -121,7 +154,7 @@ export default {
     float:right;
     line-height:70px;
     height:70px;
-    margin:0px 15px 0px 0;
+    margin:0px 50px 0px 0;
   }
   .headr-right-vue ul{
     display:inline-block;
@@ -132,6 +165,7 @@ export default {
     padding-left:50px;
     height:70px;
     color:#fff;
+    cursor: pointer;
   }
   .userimgBox img{
     height:40px;
