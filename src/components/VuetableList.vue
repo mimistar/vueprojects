@@ -23,33 +23,39 @@
     </div>
     <div class="acticlTtitle-box" id="acticlTtitle-box" >
       选择标签
-      <clicktag/>
+      <chooseTag v-for="(tag,i) in chooseData" :key="i" :tagTitle="tag"/>
+    </div>
+    <div class="acticlTtitle-box"  >
+      单选标签
+      <label class="onecheckBox">
+        <input type="radio" name="oneradio" class="oneradio" checked>
+        单选这个
+      </label>
+      <label class="onecheckBox">
+        <input type="radio" name="oneradio"  class="oneradio">
+        单选那个
+      </label>
+    </div>
+    <div class="acticlTtitle-box" style="align-items:flex-start" >
+        填写内容
+        <div style="margin-left:15px">
+           <textarea style="width:350px;height:200px">
+
+           </textarea>
+        </div>
+    </div>
+    <div class="submintB">
+      <button type="button" @click="submintC">提交</button>
+      <button type="button">取消</button>
+    </div>
+    <div v-if="alertState" class="alertmodel">
+      <p >提交成功</p>
     </div>
   </div>
 </template>
 <script>
 import datepicker from 'vue-date'
-var clicktag={
-  template:' <div class="ckeck row-one" v-on:click="checkthis()">\n' +
-          '<div class="replacecheck" style="width:18px;\n' +
-  '    height:18px;\n' +
-  '    border-radius:4px;\n' +
-  '    border:1px solid #c7c7cc;\n' +
-  '    display:inline-block;\n' +
-  '    cursor:pointer;\n' +
-  '    margin-right:10px;"  :class="{\'ischeck\':ischeck}"></div>\n' +
-          '哈哈\n'+'</div>',
-  data:()=>{
-    return{
-      ischeck:true
-    }
-  },
-  methods:{
-    checkthis(){
-      this.ischeck=!this.ischeck
-    }
-  },
-}
+import chooseTag from './chooseTag'
 export default{
   data(){
   return {
@@ -61,9 +67,17 @@ export default{
     dateTime: '2016-10-16',
     changeClose:false,
     ischeck:false,
+    alertState:false,
+    chooseData:['选项一','选项二','选项三']
     }
   },
   methods:{
+    setTimeFun(){
+      setTimeout(()=>{
+        this.alertState=false
+        this.alertInfo=""
+      },1000)
+    },
     chooseAuther(){
       this.rotateShow=!this.rotateShow
     },
@@ -76,15 +90,92 @@ export default{
     },
     checkthis(){
       this.ischeck=!this.ischeck
+    },
+    submintC(){
+      this.alertState=!this.alertState
+      this.setTimeFun()
     }
   },
-    components:{
-      'datepicker':datepicker,
-      "clicktag":clicktag
-    }
+    components:{datepicker,chooseTag}
   }
 </script>
 <style scoped>
+  .alertmodel{
+    width:250px;
+    min-height:80px;
+    position:absolute;
+    left:50%;
+    top:50px;
+    margin-top:-40px;
+    margin-left:-125px;
+    background-color:#000;
+    opacity:0.8;
+    border-radius:5px;
+    display:flex;
+    display:-webkit-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 0px 15px;
+  }
+  .alertmodel p{
+    color:#fff;
+    margin:0px;
+  }
+  .submintB button{
+    padding:5px 10px;
+    background-color: #20a0ff;
+    color:#fff;
+    outline: none;
+    border: 1px solid #20a0ff;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .oneradio:checked::after{
+    content:'';
+    border:2px solid #fff;
+    border-top:0px;
+    border-left:0px;
+    width:4px;
+    height:8px;
+    left:6px;
+    top:3px;
+    position: absolute;
+    transform:rotate(45deg) scaleY(1);
+    -ms-transform:rotate(45deg) scaleY(1);
+    -s-transform:rotate(45deg) scaleY(1);
+    -webkit-transform:rotate(45deg) scaleY(1);
+    transform-origin: center;
+  }
+  .oneradio:checked::before{
+     background-color: #20a0ff;
+    border: 1px solid #20a0ff;
+   }
+  .oneradio::before{
+    content: ' ';
+    display: inline-block;
+    width:16px;
+    height: 16px;
+    border: 1px solid #c7c7c7;
+    border-radius:2px;
+    position: absolute;
+    left:0;
+    top:0;
+  }
+  .onecheckBox{
+    display: -webkit-flex;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    height: 20px;
+    margin-left:15px;
+    position: relative;
+    padding-left:25px;
+  }
+  .oneradio{
+    width:0;
+    height:0;
+  }
   .ischeck{
     background-color:#4db3ff;
     border:1px solid #fff !important;
