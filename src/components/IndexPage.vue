@@ -123,7 +123,7 @@ export default{
     },
     sChartline:{
       canvasId: 'myCanvasline',
-      type:'折线数据',
+      type:'line',
       width: 500,
       height: 400,
       data: [
@@ -135,7 +135,7 @@ export default{
         {name:'2017', value:1450}
       ],
       options:{
-        title: '某商店近年营业总额',
+        title: '折线图像数据',
         padding: 50,
         yEqual: 5,
         bgColor: '#ffffff',

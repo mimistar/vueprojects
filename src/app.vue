@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <Login v-if="nologin" @login="goLogin($event)"/>
-    <HomeIndex v-else :username="username" :userpass="userpass"/>
+    <HomeIndex @login="goLogin($event)" v-else :username="username" :userpass="userpass"/>
   </div>
 </template>
 <script>
@@ -17,8 +17,9 @@
         }
       },
     created:function () {
-      let username =  window.localStorage.getItem('loginName')
-      let userpass = window.localStorage.getItem('userPassword')
+      let userObj =  window.localStorage.getItem('loginInfo')
+      let username = JSON.parse(userObj).username
+      let userpass =JSON.parse(userObj).userpass
       if(username&&userpass){
         this.nologin=false
         this.username=username
@@ -27,6 +28,13 @@
     },
     methods:{
       goLogin(e){
+        let userObj =  window.localStorage.getItem('loginInfo')
+        if(userObj){
+          let username = JSON.parse(userObj).username
+          let userpass =JSON.parse(userObj).userpass
+          this.username=username
+          this.userpass=userpass
+        }
         this.nologin=e
       }
     }

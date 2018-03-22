@@ -52,9 +52,9 @@
       </div>
     </div>
     <div v-if="alertState" class="alertmodel">
-      <p v-if="alertType=='dele'">你删除了第{{this.alertInfo}}行</p>
+      <p v-if="alertType=='dele'">你删除了id为{{this.alertInfo}}的文章</p>
       <p v-else-if="alertType=='nodata'">请先选择你要删除的数据</p>
-      <p v-else-if="alertType=='edit'">你要编辑第{{this.alertInfo}}行</p>
+      <p v-else-if="alertType=='edit'">你要编辑id为{{this.alertInfo}}的文章</p>
     </div>
 </div>
 </template>

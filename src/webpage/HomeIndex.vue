@@ -10,8 +10,10 @@
        </div>
        <div class="userimgBox" @click="outLoginshow">
         <img class="userimg"  src="../assets/logo.png"/>
-        {{username}}
-         <div class="outLogin" @click="outLogin" v-if="outstats">退出</div>
+          {{username}}
+         <transition name="outLanimation">
+          <div class="outLogin" @click="outLogin" v-if="outstats">退出</div>
+         </transition>
        </div>
       </div>
    </div>
@@ -97,24 +99,30 @@ export default {
       this.eqindex=e
     },
     outLoginshow(){
-      this.outstats=true
+      this.outstats=!this.outstats
     },
     outLogin(){
-      window.localStorage.removeItem('loginName')
-      window.localStorage.removeItem('userPassword')
+      window.localStorage.removeItem('loginInfo')
       this.$emit('login',true)
     }
   }
 }
 </script>
 <style scoped>
+    .outLanimation-enter-active,.outLanimation-leave-active{
+      transition:all 0.5s;
+    }
+   .outLanimation-enter,.outLanimation-leave-to{
+     transform:translateY(-10px);
+     opacity: 0;
+   }
   .outLogin{
     position: absolute;
-    width:50px;
+    width:60px;
     height:25px;
     padding:5px 0;
     color:#fff;
-    right:-10px;
+    right:-5px;
     top:60px;
     line-height: 25px;
     border-radius: 4px;

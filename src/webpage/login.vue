@@ -1,7 +1,7 @@
 <template>
   <div class="loginBox">
     <div class="loginInfo">
-      <h2>登录界面</h2>
+      <h2 style="margin:0px 0 10px 0">登录界面</h2>
       <div class="userInfo">
         <div class="userName">
           <input class="userNameIp" type="text" v-model="userName" placeholder="请输入用户名"/>
@@ -37,8 +37,8 @@
       methods:{
         goLogin(){
             if(this.userName&&this.userPassword){
-              window.localStorage.setItem('loginName',this.userName)
-              window.localStorage.setItem('userPassword',this.userPassword)
+              let userObj = {'username':this.userName,'userpass':this.userPassword}
+              window.localStorage.setItem('loginInfo',JSON.stringify(userObj))
               this.$emit('login',false)
             }
              if(!this.userName&&!this.userPassword){
@@ -72,7 +72,7 @@
   }
     .tips{
       font-size:12px;
-      color:#8e8e93
+      color:#8e8e93;
     }
     .loginIn{
       outline: none;
