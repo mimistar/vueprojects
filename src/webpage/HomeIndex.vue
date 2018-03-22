@@ -72,10 +72,9 @@ export default {
               {title:'编辑编辑',url:'VuetableList'}
             ]
         },
-
         {
-            title:'会员',
-            url:'',
+            title:'地图',
+            url:'Maps',
         },
         {
             title:'模板',

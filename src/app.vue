@@ -17,6 +17,7 @@
         }
       },
     created:function () {
+        //模拟登陆，用户密码存本地，
       let userObj =  window.localStorage.getItem('loginInfo')
       let username = JSON.parse(userObj).username
       let userpass =JSON.parse(userObj).userpass

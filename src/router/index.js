@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import IndexPage from '@/components/IndexPage'
 import VuetableList from '@/components/VuetableList'
 import Myself from '@/components/Myself'
-import Chlidrenpage from '@/components/Chlidrenpage'
+import Maps from '@/components/Maps'
 import TableList from '@/components/TableList'
 Vue.use(Router)
 export default new Router({
@@ -25,14 +25,14 @@ export default new Router({
       component: TableList,
     },
     {
-      path:'/VuetableList',
-      name: 'VuetableList',
-      component:VuetableList,
-      children:[
-      {
-        path: 'Chlidrenpage',
-        component: Chlidrenpage,
-      }]
+      path:'/Maps',
+      name: 'Maps',
+      component:Maps,
+      // children:[
+      // {
+      //   path: 'Chlidrenpage',
+      //   component: Chlidrenpage,
+      // }]
     },
     { path:"*", redirect:"/" }
   ]
