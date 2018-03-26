@@ -25,6 +25,11 @@ export default new Router({
       component: TableList,
     },
     {
+      path: '/VuetableList',
+      name: 'VuetableList',
+      component: VuetableList,
+    },
+    {
       path:'/Maps',
       name: 'Maps',
       component:Maps,

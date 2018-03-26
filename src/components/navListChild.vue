@@ -15,7 +15,7 @@
             class="childClass"
             v-for="(navchild,i) in morenav.child"
             @click="routerGo(navchild.url,navchild.title,i)"
-            v-bind:key="i"
+            :key="i"
             :class="{'childActive':chilIndex===i}"
           >
             <!--<router-link-->
@@ -58,6 +58,7 @@
         this.$emit("setIndex",i)
       },
       routerGo(url,title,i){
+        console.log(url,title,i)
         this.chilIndex=i
         //和react native中的navigator.push差不多的意思
         this.$router.push({

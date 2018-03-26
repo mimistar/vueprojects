@@ -5,7 +5,7 @@
     <div class="acticlAuther-box">作者选择<i class="sanjiao" :class="{'daosanjiao':rotateShow}"></i><input  v-on:click="chooseAuther" placeholder="请选择" v-bind:value="acticlAuther"  type="text" class="acticlAuther" readonly/>
     <transition-group name="slide-fade" tag="p">
       <ul class="authList"  v-if="rotateShow" v-bind:key="AuthList">
-        <li v-for="(Auth,i) in AuthList" v-bind:key="i" v-on:click="chooseTrue(Auth)">{{Auth}}</li>
+        <li v-for="(Auth,index) in AuthList" :key="index" v-on:click="chooseTrue(Auth)">{{Auth}}</li>
       </ul>
     </transition-group>
     </div>
