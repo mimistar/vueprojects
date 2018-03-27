@@ -4,7 +4,7 @@
       <el-amap-search-box id="searchText" class="search-box"  :on-search-result="onSearchResult"></el-amap-search-box>
       <div class="toolbar">
         <span v-if="loaded">
-          location: 经度 = {{ lng }} 纬度 = {{ lat }}
+          定位到你的位置: 经度 = {{ lng }} 纬度 = {{ lat }}
         </span>
         <span v-else>正在定位...</span>
       </div>

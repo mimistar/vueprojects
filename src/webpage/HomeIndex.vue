@@ -78,7 +78,7 @@ export default {
         },
         {
             title:'模板',
-            url:'',
+            url:'ModelPage',
         },
         {
             title:'系统',

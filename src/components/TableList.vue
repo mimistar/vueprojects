@@ -59,7 +59,7 @@
 </div>
 </template>
 <script>
-import ChooseCheck from '../components/ChooseCheck'
+import ChooseCheck from '../units/ChooseCheck'
 export default{
   components:{
     'ChooseCheck':ChooseCheck

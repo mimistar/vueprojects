@@ -55,7 +55,7 @@
 </template>
 <script>
 import datepicker from 'vue-date'
-import chooseTag from './chooseTag'
+import chooseTag from '../units/chooseTag'
 export default{
   data(){
   return {
