@@ -87,7 +87,7 @@ export default{
       alertState:false,
       alertInfo:'',
       alertType:'dele',
-      pageindex:1,
+      pageindex:1,//当前页码
       searchInfo:'',
       allData:[],
     }
@@ -102,7 +102,7 @@ export default{
     searchFun(){
       let pageNum  =0
       let pageArray =[]
-      this.$http.get("http://jsonplaceholder.typicode.com/todos")
+      this.$http.jsonp("http://jsonplaceholder.typicode.com/todos")
         .then((data)=>{
           this.allData=data.body
           pageNum =Math.ceil(data.body.length/this.pageSize)
@@ -111,9 +111,10 @@ export default{
           }
           this.pagelistData=pageArray
           this.acticelArray=data.body.slice(0,10)
-        },(erorr)=>{
-          console.log(erorr)
+        },(error)=>{
+          console.log(error)
         })
+      this.pageindex=1
     },
     /** 全选**/
     chooseall(){
