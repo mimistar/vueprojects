@@ -21,4 +21,6 @@ npm install vue-date --save
 
 #install vue-map
 npm install vue-amap
+#install vue-resource
+npm install vue-resource --save
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
