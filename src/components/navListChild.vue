@@ -58,7 +58,6 @@
         this.$emit("setIndex",i)
       },
       routerGo(url,title,i){
-        console.log(url,title,i)
         this.chilIndex=i
         //和react native中的navigator.push差不多的意思
         this.$router.push({

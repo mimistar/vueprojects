@@ -100,17 +100,18 @@ export default{
   },
   methods:{
     searchFun(){
+     let _this =this
       let pageNum  =0
       let pageArray =[]
-      this.$http.jsonp("http://jsonplaceholder.typicode.com/todos")
+      _this.$http.jsonp("http://jsonplaceholder.typicode.com/todos")
         .then((data)=>{
-          this.allData=data.body
+          _this.allData=data.body
           pageNum =Math.ceil(data.body.length/this.pageSize)
           for(let i=1;i<pageNum;i++){
             pageArray.push(i)
           }
-          this.pagelistData=pageArray
-          this.acticelArray=data.body.slice(0,10)
+          _this.pagelistData=pageArray
+          _this.acticelArray=data.body.slice(0,10)
         },(error)=>{
           console.log(error)
         })
