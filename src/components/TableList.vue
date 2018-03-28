@@ -31,8 +31,8 @@
           :acticelArray="acticelArray"
           :acticle="acticle" >
         </ChooseCheck>
-        <div class="time row-one"><span>{{acticle.date}}</span></div>
-        <div class="auther row-one"><span>{{acticle.auther}}</span></div>
+        <div class="time row-one"><span>{{acticle.completed}}</span></div>
+        <div class="auther row-one"><span>{{acticle.userId}}</span></div>
         <div class="actilceTitle row-one"><span>{{acticle.title}}</span></div>
         <div class="automore row-one">
           <button class="oneEdit"  v-on:click="editRemove(acticle.id)">编辑</button>
@@ -42,8 +42,8 @@
       <div class="pageList">
         <ul>
           <li v-on:click="changePage('frist')"><span>首页</span></li>
-          <li v-for="(page,i) in pagelistData"
-              :class="{'active':pageindex==i}"
+          <li v-for="(page,i) in pagelistData.slice(0,10)"
+              :class="{'active':pageindex==parseInt(i)+1}"
               v-on:click="changePage(i)" ><span>{{page}}</span></li>
           <li v-on:click="changePage('last')"><span>末页</span></li>
           <li v-on:click="changePage('up')"><span>上一页</span></li>
@@ -81,22 +81,39 @@ export default{
         {id:6,date:'2018-2-6',auther:'star6',title:'6文章标题文章标题文章标题文章标题文章标题'},
         {id:7,date:'2018-2-7',auther:'star7',title:'7文章标题文章标题文章标题文章标题文章标题'},
       ],
-      pagelistData:[1,2,3,4,5,6,7],
+      pagelistData:[],
+      pageSize:10,//页码
       chooseArray:[],
       alertState:false,
       alertInfo:'',
       alertType:'dele',
-      pageindex:0,
+      pageindex:1,
       searchInfo:'',
+      allData:[],
     }
   },
   beforeMount:function(){
   },
   created:function(){
-      // this.$emit("setChild",)
+    this.searchFun()
+
   },
   methods:{
     searchFun(){
+      let pageNum  =0
+      let pageArray =[]
+      this.$http.get("http://jsonplaceholder.typicode.com/todos")
+        .then((data)=>{
+          this.allData=data.body
+          pageNum =Math.ceil(data.body.length/this.pageSize)
+          for(let i=1;i<pageNum;i++){
+            pageArray.push(i)
+          }
+          this.pagelistData=pageArray
+          this.acticelArray=data.body.slice(0,10)
+        },(erorr)=>{
+          console.log(erorr)
+        })
     },
     /** 全选**/
     chooseall(){
@@ -150,6 +167,7 @@ export default{
       this.chooseArray=[]
       this.chooseArray.push(id)
       this.deleteCommon()
+      this.searchFun()
     },
     editRemove(id){
         if(this.noDoubleClick()){
@@ -171,19 +189,24 @@ export default{
           return;
       }
       this.deleteCommon()
+      this.searchFun()
     },
     changePage(i){
       if(i=='frist'){
-        this.pageindex=0
+        this.pageindex=1
       }else if(i=='last'){
-        this.pageindex=this.pagelistData.length-1
+        this.pageindex=this.pagelistData.length
       }else if(i=='up'){
-        this.pageindex!==0?this.pageindex--:this.pageindex=this.pageindex;
+        this.pageindex!==1?this.pageindex--:this.pageindex=this.pageindex;
       }else if(i=='down'){
-        this.pageindex!==this.pagelistData.length-1?this.pageindex++:this.pageindex=this.pageindex
+        this.pageindex!==this.pagelistData.length?this.pageindex++:this.pageindex=this.pageindex
       }else{
-        this.pageindex=i
+        this.pageindex=i+1
       }
+      this.pageCount(this.pageindex)
+    },
+    pageCount(pageIndex){
+      this.acticelArray=this.allData.slice((pageIndex-1)*this.pageSize,this.pageSize*pageIndex)
     }
   }
 }
