@@ -54,7 +54,7 @@
       methods:{
         routerGo(url,title,i){
           this.$router.push({
-            path:'/ModelPage/'+url,
+            path:'/ModelPage/'+url,//一个/都不能少否则会有问题
             query:{
               title:title
             }

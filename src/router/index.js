@@ -40,8 +40,7 @@ export default new Router({
     },
     {
       path: '/ModelPage',
-      // name: 'ModelPage',//有子类还不能设置别名,设置了别名默认子类显示不出来,呵呵！
-      //设置了name不能显示默认嵌套路由,不设置name就需要设置嵌套路径,哈哈哈哈哈哈这东西真™神奇
+      // name: 'ModelPage',//有子类不能设置别名,设置了别名默认子类显示不出来,呵呵！
       component: ModelPage,
       children:[
       {
