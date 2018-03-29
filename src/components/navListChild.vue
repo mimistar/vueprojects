@@ -3,14 +3,14 @@
     <dt v-on:click="showOrfade(indexParent)" :class="{'active':indexParent===eqindex}">
       <!--img class="navIcon" src="../assets/logo.png"-->
       <p class="navTitle">
-        <router-link v-if="morenav.url" :to="{name:morenav.url,params:{title:morenav.title}}">{{morenav.title}}</router-link>
-        <!--router-link :to="{path:morenav.url}">{{morenav.title}}</router-link-->
+        <router-link v-if="morenav.url" :key="indexParent" :to="{path:morenav.url,params:{title:morenav.title}}">{{morenav.title}}</router-link>
+        <!--<router-link v-else :to="{path:morenav.url,params:{title:morenav.title}}">{{morenav.title}}</router-link>-->
         <a v-else>{{morenav.title}}</a>
       </p>
       <img  v-if="morenav.child" class="upDownIcon" :class="{'fiexdClass':show}" src="../assets/logo.png">
     </dt>
     <transition-group name="slide-fade" tag="p">
-        <div class="childNav" v-if="show" v-bind:key="morenav" >
+        <div class="childNav" v-if="show" v-bind:key="indexParent" >
           <dd
             class="childClass"
             v-for="(navchild,i) in morenav.child"

@@ -6,6 +6,9 @@ import Myself from '@/components/Myself'
 import Maps from '@/components/Maps'
 import TableList from '@/components/TableList'
 import ModelPage from '@/components/ModelPage'
+import ListPage from '@/components/modelChild/ListPage'
+import ModelIndex from '@/components/modelChild/Modelindex'
+import AbouteUs from '@/components/modelChild/AbouteUs'
 Vue.use(Router)
 export default new Router({
   mode:'history',
@@ -34,16 +37,29 @@ export default new Router({
       path:'/Maps',
       name: 'Maps',
       component:Maps,
-      // children:[
-      // {
-      //   path: 'Chlidrenpage',
-      //   component: Chlidrenpage,
-      // }]
     },
     {
       path: '/ModelPage',
-      name: 'ModelPage',
+      // name: 'ModelPage',//有子类还不能设置别名,设置了别名默认子类显示不出来,呵呵！
+      //设置了name不能显示默认嵌套路由,不设置name就需要设置嵌套路径,哈哈哈哈哈哈这东西真™神奇
       component: ModelPage,
+      children:[
+      {
+        path: '',//默认显示改页
+        // name: 'ModelIndex',
+        component: ModelIndex,
+      },
+      {
+        path: 'ListPage',
+        // name: 'ListPage',
+        component: ListPage,
+      },
+      {
+        path: 'AbouteUs',
+        // name: 'AbouteUs',
+        component: AbouteUs,
+      },
+      ]
     },
     { path:"*", redirect:"/" }
   ]

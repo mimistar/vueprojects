@@ -30,7 +30,6 @@
             :eqindex="eqindex"
             @setIndex="setEqindex($event)"
           >
-
           </NavChild>
         </dl>
         </div>
