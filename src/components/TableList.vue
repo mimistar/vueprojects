@@ -103,7 +103,7 @@ export default{
      let _this =this
       let pageNum  =0
       let pageArray =[]
-      const url ="http://jsonplaceholder.typicode.com/todos"
+      const url ="http://jsonplaceholder.typicode.com/todos"//网上找的一个接口。。。
       // const url ="http://localhost:30"
       _this.$http.jsonp(url)
         .then((data)=>{
