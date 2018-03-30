@@ -1,7 +1,9 @@
 <template>
   <div class="mapBox">
     <div class="searchMap">
-      <el-amap-search-box id="searchText" class="search-box"  :on-search-result="onSearchResult"></el-amap-search-box>
+      <div>
+        <el-amap-search-box id="searchText" class="search-box"  :on-search-result="onSearchResult"></el-amap-search-box>
+      </div>
       <div class="toolbar">
         <span v-if="loaded">
           定位到你的位置: 经度 = {{ lng }} 纬度 = {{ lat }}
@@ -124,8 +126,11 @@
     border-radius: 4px;
     border:1px solid #c7c7c7;
     height:33px;
-    width:200px;
     padding-left:15px;
+  }
+  #searchText > div{
+    width: 100%;
+    left: 0;
   }
   .searchMap{
     padding:15px;

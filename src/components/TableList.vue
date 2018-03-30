@@ -103,8 +103,12 @@ export default{
      let _this =this
       let pageNum  =0
       let pageArray =[]
-      _this.$http.jsonp("http://jsonplaceholder.typicode.com/todos")
+      // const url ="http://jsonplaceholder.typicode.com/todos"
+      const url ="http://localhost:30"
+      _this.$http.jsonp(url)
         .then((data)=>{
+          console.log(data)
+          return;
           _this.allData=data.body
           pageNum =Math.ceil(data.body.length/this.pageSize)
           for(let i=1;i<pageNum;i++){

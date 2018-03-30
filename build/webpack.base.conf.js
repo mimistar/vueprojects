@@ -11,12 +11,13 @@ function resolve (dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/root.js'
+    app: './src/root.js'//入口文件
   },
+
   output: {
-    path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
+    path: config.build.assetsRoot,//打包生成的出口文件
+    filename: '[name].js',//打包生成的文件
+    publicPath: process.env.NODE_ENV === 'production'//不同环境引用路径
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
@@ -25,6 +26,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'assets':resolve('src/assets'),
+      'img':resolve('src/assets/img'),
     }
   },
   module: {
@@ -59,8 +62,8 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        limit: 10000,
+        name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
     ]

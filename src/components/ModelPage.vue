@@ -6,13 +6,24 @@
             <li
               v-for="(nav,index) in navArray"
               :key="index"
-              :class="{'active':index===0}"
+              :class="{'active':index===thisIndex}"
               @click="routerGo(nav.url,nav.title,index)"
             >
               {{nav.title}}
             </li>
           </ul>
         </div>
+      </div>
+      <div class="banner">
+        <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
+          <!-- slides -->
+          <swiper-slide><img src="../assets/banner1.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="../assets/banner2.jpg" alt=""></swiper-slide>
+          <!-- Optional controls -->
+          <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+          <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+          <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+        </swiper>
       </div>
       <div>
         <router-view></router-view>
@@ -48,22 +59,40 @@
             url:'ListPage'
             },
           ],
+          thisIndex:0,
+          swiperOption:{
+            autoplay: {
+              delay: 2500,
+              disableOnInteraction: false
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }
+          },
 
         }
       },
       methods:{
         routerGo(url,title,i){
+          this.thisIndex=i
           this.$router.push({
-            path:'/ModelPage/'+url,//一个/都不能少否则会有问题
+            path:'/ModelPage/'+url,// 这里一个 / 都不能少否则会有问题
             query:{
               title:title
             }
           })
-        }
+        },
+        callback(){
+
+        },
       }
     }
 </script>
-
 <style scoped>
   ul,li,h1,h2,h3,h4,h5,h6,p,from{
     padding:0px;
@@ -99,6 +128,9 @@
   }
   .nav-list ul{
     overflow: hidden;
+    padding:0px;
+    list-style: none;
+    margin:0px;
   }
   .nav-list ul li{
     color: #fff;
@@ -113,5 +145,11 @@
   }
   .nav-list ul li.active {
     color:#1e9fff
+  }
+  .banner{
+    min-height: 500px;
+  }
+  .banner img{
+    width: 100%;
   }
 </style>

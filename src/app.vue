@@ -41,7 +41,11 @@
     }
   }
 </script>
-
+<!--样式可以这样-->
+<!--<style lang="stylus" rel="stylesheet/stylus">-->
+  <!--@import "xxxxx.styl";-->
+<!--</style>-->
+<!--或者这样-->
 <style scoped>
   .content{
     width:100%;
