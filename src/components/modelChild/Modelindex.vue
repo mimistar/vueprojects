@@ -5,11 +5,11 @@
       </div>
       <div class="aboutUs">
         <ul class="aboutUs-list-box">
-          <li class="jisu" @click="$store.commit('teggter')">
+          <li class="jisu" @click="$store.commit('mutations_common')">
             <i></i>
             <p>一流的技术</p>
           </li>
-          <li @click="$store.dispatch('teggter_aciton')" class="sudu">
+          <li @click="$store.dispatch('actions_common')" class="sudu">
             <i></i>
             <p>飞一般的开发速度</p>
           </li>
