@@ -5,11 +5,11 @@
       </div>
       <div class="aboutUs">
         <ul class="aboutUs-list-box">
-          <li class="jisu">
+          <li class="jisu" @click="$store.commit('teggter')">
             <i></i>
             <p>一流的技术</p>
           </li>
-          <li class="sudu">
+          <li @click="$store.dispatch('teggter_aciton')" class="sudu">
             <i></i>
             <p>飞一般的开发速度</p>
           </li>
@@ -23,13 +23,18 @@
           </li>
         </ul>
       </div>
+      <div class="testClass">
+        <testChange/>
+      </div>
     </div>
 </template>
 
 <script>
   import 'swiper/dist/css/swiper.css'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import testChange from './testChange'
     export default {
+    components:{testChange},
       data(){
         return{
 
@@ -42,6 +47,9 @@
 </script>
 
 <style scoped>
+  .testClass{
+    height: 100px;
+  }
   ul,li,h1,h2,h3,h4,h5,h6,p,from{
     padding:0px;
     list-style: none;

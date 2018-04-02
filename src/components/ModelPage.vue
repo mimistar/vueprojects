@@ -17,6 +17,7 @@
       <div class="banner">
         <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
           <!-- slides -->
+          <swiper-slide><img src="../assets/banner3.jpg" alt=""></swiper-slide>
           <swiper-slide><img src="../assets/banner1.jpg" alt=""></swiper-slide>
           <swiper-slide><img src="../assets/banner2.jpg" alt=""></swiper-slide>
           <!-- Optional controls -->
@@ -61,10 +62,10 @@
           ],
           thisIndex:0,
           swiperOption:{
-            autoplay: {
-              delay: 2500,
-              disableOnInteraction: false
-            },
+            // autoplay: {
+            //   delay: 2500,
+            //   disableOnInteraction: false
+            // },
             pagination: {
               el: '.swiper-pagination',
               clickable: true
@@ -74,7 +75,6 @@
               prevEl: '.swiper-button-prev'
             }
           },
-
         }
       },
       methods:{
