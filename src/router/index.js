@@ -6,9 +6,9 @@ import Myself from '@/components/Myself'
 import Maps from '@/components/Maps'
 import TableList from '@/components/TableList'
 import ModelPage from '@/components/ModelPage'
-import ListPage from '@/components/modelChild/ListPage'
-import ModelIndex from '@/components/modelChild/Modelindex'
-import AbouteUs from '@/components/modelChild/AbouteUs'
+import ListPage from '@/components/modelchild/ListPage'
+import ModelIndex from '@/components/modelchild/Modelindex'
+import AbouteUs from '@/components/modelchild/AbouteUs'
 Vue.use(Router)
 export default new Router({
   mode:'history',
